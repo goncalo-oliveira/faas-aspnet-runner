@@ -2,8 +2,9 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using OpenFaaS;
 
-namespace OpenFaaS
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class FunctionConfigurationExtensions
     {
