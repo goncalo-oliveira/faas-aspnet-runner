@@ -5,7 +5,7 @@
     <RootNamespace>OpenFaaS</RootNamespace>
     <AssemblyName>openfaas.runner.abstractions</AssemblyName>
     <PackageId>OpenFaaS.Runner.Abstractions</PackageId>
-    <Version>2.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Goncalo Oliveira</Authors>
     <Description>OpenFaaS ASPNET Function Runner</Description>
     <RepositoryUrl>https://github.com/goncalo-oliveira/faas-aspnet-runner</RepositoryUrl>

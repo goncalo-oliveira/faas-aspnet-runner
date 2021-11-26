@@ -50,7 +50,7 @@ namespace OpenFaaS
             }
 
             // lookup constructor without parameters (minimal model)
-            var ctor = type.GetConstructor( BindingFlags.Public, System.Type.EmptyTypes );
+            var ctor = type.GetConstructor( BindingFlags.Public | BindingFlags.Instance, System.Type.EmptyTypes );
 
             if ( ctor != null )
             {
@@ -59,7 +59,7 @@ namespace OpenFaaS
 
             // if that doesn't work
             // lookup constructor with configuration argument (Generic Host model)
-            ctor = type.GetConstructor( BindingFlags.Public, new Type[]
+            ctor = type.GetConstructor( BindingFlags.Public | BindingFlags.Instance, new Type[]
             {
                 typeof( Microsoft.Extensions.Configuration.IConfiguration )
             } );
