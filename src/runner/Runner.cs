@@ -33,7 +33,11 @@ namespace OpenFaaS.Hosting
 
         private static void RunParsed( string[] args, Action<RunnerOptions> runAction )
         {
-            var parsed = Parser.Default.ParseArguments<RunnerOptions>( args );
+            var parsed = new Parser( settings =>
+            {
+                settings.IgnoreUnknownArguments = true;
+            } )
+            .ParseArguments<RunnerOptions>( args );
 
             var version = Assembly.GetExecutingAssembly()
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.ToString();
@@ -42,14 +46,14 @@ namespace OpenFaaS.Hosting
             Console.WriteLine();
 
             parsed.WithParsed( options =>
-            {
-                if ( options.Version )
                 {
-                    return;
-                }
+                    if ( options.Version )
+                    {
+                        return;
+                    }
 
-                runAction( options );
-            } );
+                    runAction( options );
+                } );
         }
 
         private static void Run( WebApplicationBuilder builder
@@ -72,7 +76,7 @@ namespace OpenFaaS.Hosting
             builder.Configuration.AddOpenFaaSSecrets();
 
             builder.WebHost.UseKestrel();
-            //builder.UseUrls( $"http://*:{options.Port}" );
+            builder.WebHost.UseUrls( $"http://*:{options.Port}" );
 
             builder.Services.AddCors( options =>
             {
@@ -138,7 +142,8 @@ namespace OpenFaaS.Hosting
 
             app.UseCors( "AllowAll" );
 
-            app.Run( $"http://*:{options.Port}" );
+            //app.Run( $"http://*:{options.Port}" );
+            app.Run();
         }
     }
 }
